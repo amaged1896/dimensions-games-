@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const dbConnection = () => {
-    mongoose.connect('mongodb://127.0.0.1:27017/Dimensions-Games')
+    mongoose.connect(process.env.DATABASE_ATLAS)
         .then(() => console.log('Database connection established successfully'))
         .catch((err) => console.log('Database connection failed', err.message));
 };
