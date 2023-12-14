@@ -8,6 +8,7 @@ const app = express();
 const port = 3000;
 dbConnection();
 
+app.get('/', (req, res) => res.send('Home Page'));
 // Routing
 appRouter(app, express);
 
