@@ -30,7 +30,7 @@ const sendErrProduction = (err, res) => {
     console.log(err);
     if (err.isOperational) {
         res.status(err.statusCode).json({
-            status: err.message,
+            status: err.status,
             message: err.message,
         });
     } else {
@@ -67,10 +67,10 @@ export const errorController = (err, req, res, next) => {
         // let error = { ...err, };
         console.log(process.env.NODE_ENV);
         console.log(err);
-        if (err.name === 'CastError') err = handleErrDBCast(err); //for requesting wrong id
-        if (err.code === 11000) err = handleDuplicateFelidDB(err); // post the same name of tour
-        if (err.name === 'ValidationError') err = handleValidationDB(err); //validation err
-        if (err.name === 'JsonWebTokenError') err = handleJwt(err); //validation err
+        if (err.name === 'CastError') err = handleErrDBCast(err); // for requesting wrong id
+        if (err.code === 11000) err = handleDuplicateFelidDB(err); // duplicated field
+        if (err.name === 'ValidationError') err = handleValidationDB(err); // validation err
+        if (err.name === 'JsonWebTokenError') err = handleJwt(err); // token err
         if (err.name === 'TokenExpiredError') err = handleJwtExpiration(); // err expiration time for the token
         sendErrProduction(err, res);
     }

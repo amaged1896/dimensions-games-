@@ -18,7 +18,7 @@ export const addArticle = catchAsync(async (req, res, next) => {
         title: req.body.title,
         content: req.body.content,
         author: req.body.author,
-        images: req.files.images.map(obj => obj.filename)
+        images: req.files?.images?.map(obj => obj.filename)
     });
     sendData(201, "success", "article added successfully", newArticle, res);
 });
@@ -34,7 +34,7 @@ export const updateArticle = catchAsync(async (req, res, next) => {
         article.author = req.body.author || article.author;
     // Check if there are new images to be added
     if (req.files && req.files.images) {
-        article.images = req.files.images.map(obj => obj.filename);
+        article.images = req.files?.images.map(obj => obj.filename);
     }
     await article.save();
     sendData(200, "success", "article updated successfully", article, res);

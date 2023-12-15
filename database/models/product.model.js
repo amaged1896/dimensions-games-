@@ -34,12 +34,10 @@ const productSchema = mongoose.Schema({
 }, { timestamps: true });
 
 
-productSchema.post('init', function (doc) {
-    console.log('hello');
-    console.log(process.env.BASE_URL);
-    if (doc.images && doc.images.length > 0) {
-        doc.images = doc.images.map(image => process.env.BASE_URL + "/products/" + image);
-    }
-});
+// productSchema.post('init', function (doc) {
+//     if (doc.images && doc.images.length > 0) {
+//         doc.images = doc.images.map(image => process.env.BASE_URL + "/product/" + image);
+//     }
+// });
 
 export const Product = mongoose.model('product', productSchema);
